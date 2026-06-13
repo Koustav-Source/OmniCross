@@ -178,7 +178,7 @@ export default function App() {
       />
 
       {/* Dynamic Workspace Container */}
-      <main className="flex-1 mx-auto w-full max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+      <main className="flex-1 mx-auto w-full max-w-7xl px-3 py-4 sm:px-6 sm:py-6 lg:px-8">
         
         {/* View 1: Live Overview Dashboard */}
         {activeTab === 'overview' && (
@@ -250,27 +250,36 @@ export default function App() {
 
       {/* Toast Popup Bar */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 max-w-md rounded-2xl bg-gradient-to-r from-indigo-900 to-slate-900 p-4 border border-indigo-500/50 shadow-2xl shadow-indigo-600/30 text-xs text-white animate-bounce flex items-center gap-3">
+        <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 left-4 sm:left-auto z-50 max-w-sm rounded-lg sm:rounded-2xl bg-gradient-to-r from-indigo-900 to-slate-900 p-3 sm:p-4 border border-indigo-500/50 shadow-2xl shadow-indigo-600/30 text-xs text-white animate-bounce flex items-center gap-3">
           <span className="flex h-3 w-3 relative shrink-0">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500" />
           </span>
-          <span className="font-semibold leading-snug">{toastMessage}</span>
+          <span className="font-semibold leading-snug text-xs">{toastMessage}</span>
         </div>
       )}
 
       {/* Premium Dark Command Deck Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950/80 py-6 text-center text-xs text-slate-500">
-        <div className="mx-auto flex max-w-7xl flex-col sm:flex-row items-center justify-between px-4 sm:px-6 gap-4">
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <strong>OmniCross Nexa AI</strong> — Distributed High-Frequency Enterprise Traffic Command Engine
+      <footer className="border-t border-slate-900 bg-slate-950/80 py-4 sm:py-6 text-center text-[10px] sm:text-xs text-slate-500">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:gap-4 px-3 sm:px-6">
+          <div className="flex items-center gap-2 justify-center">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+            <strong className="text-slate-300">OmniCross Nexa AI</strong>
+            <span className="hidden sm:inline">— Distributed High-Frequency Enterprise Traffic Command Engine</span>
           </div>
 
-          <div className="flex items-center gap-4 text-slate-400">
-            <span>WebSocket Tunnels: <strong className="text-emerald-400">Encrypted TLS</strong></span>
-            <span>Edge Node Latency: <strong className="text-indigo-400">14ms Average</strong></span>
-            <span>Simulation Grid: <strong className="text-cyan-400">60 FPS</strong></span>
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-slate-400 text-[9px] sm:text-xs">
+            <span>
+              WebSocket: <strong className="text-emerald-400">TLS</strong>
+            </span>
+            <span className="hidden sm:inline">|</span>
+            <span>
+              Latency: <strong className="text-indigo-400">14ms</strong>
+            </span>
+            <span className="hidden sm:inline">|</span>
+            <span>
+              Grid: <strong className="text-cyan-400">60 FPS</strong>
+            </span>
           </div>
         </div>
       </footer>

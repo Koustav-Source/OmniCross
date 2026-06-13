@@ -245,32 +245,32 @@ export const CrossingView: React.FC<CrossingViewProps> = ({
   };
 
   return (
-    <div className="space-y-6 pb-12">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div className="space-y-4 sm:space-y-6 pb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         
         {/* Left 2 Cols: Main Simulated Animation Canvas Deck */}
-        <div className="lg:col-span-2 space-y-4">
+        <div className="lg:col-span-2 space-y-3 sm:space-y-4">
           <CrossingCanvas crossing={activeCrossing} vehicles={vehicles} />
           
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="rounded-xl bg-slate-900/80 p-3 border border-slate-800 text-center">
-              <div className="text-[10px] font-bold uppercase text-slate-400">Active Map Units</div>
-              <div className="text-xl font-black text-indigo-400 mt-1">{vehicles.length}</div>
+          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+            <div className="rounded-lg sm:rounded-xl bg-slate-900/80 p-2.5 sm:p-3 border border-slate-800 text-center">
+              <div className="text-[9px] sm:text-[10px] font-bold uppercase text-slate-400 leading-tight">Active Map Units</div>
+              <div className="text-lg sm:text-xl font-black text-indigo-400 mt-0.5 sm:mt-1">{vehicles.length}</div>
             </div>
 
-            <div className="rounded-xl bg-slate-900/80 p-3 border border-slate-800 text-center">
-              <div className="text-[10px] font-bold uppercase text-slate-400">Simulation Speed</div>
-              <div className="text-xl font-black text-emerald-400 mt-1">1.0x Realtime</div>
+            <div className="rounded-lg sm:rounded-xl bg-slate-900/80 p-2.5 sm:p-3 border border-slate-800 text-center">
+              <div className="text-[9px] sm:text-[10px] font-bold uppercase text-slate-400 leading-tight">Simulation Speed</div>
+              <div className="text-lg sm:text-xl font-black text-emerald-400 mt-0.5 sm:mt-1">1.0x</div>
             </div>
 
-            <div className="rounded-xl bg-slate-900/80 p-3 border border-slate-800 text-center">
-              <div className="text-[10px] font-bold uppercase text-slate-400">Intersection Yield</div>
-              <div className="text-xl font-black text-amber-400 mt-1">98.2% Safe</div>
+            <div className="rounded-lg sm:rounded-xl bg-slate-900/80 p-2.5 sm:p-3 border border-slate-800 text-center">
+              <div className="text-[9px] sm:text-[10px] font-bold uppercase text-slate-400 leading-tight">Intersection Yield</div>
+              <div className="text-lg sm:text-xl font-black text-amber-400 mt-0.5 sm:mt-1">98.2%</div>
             </div>
 
-            <div className="rounded-xl bg-slate-900/80 p-3 border border-slate-800 text-center">
-              <div className="text-[10px] font-bold uppercase text-slate-400">AI Latency Sync</div>
-              <div className="text-xl font-black text-cyan-400 mt-1">12 ms</div>
+            <div className="rounded-lg sm:rounded-xl bg-slate-900/80 p-2.5 sm:p-3 border border-slate-800 text-center">
+              <div className="text-[9px] sm:text-[10px] font-bold uppercase text-slate-400 leading-tight">AI Latency</div>
+              <div className="text-lg sm:text-xl font-black text-cyan-400 mt-0.5 sm:mt-1">12 ms</div>
             </div>
           </div>
         </div>

@@ -92,63 +92,63 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
   };
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="space-y-4 sm:space-y-6 pb-12">
       
       {/* 1. KPI Telemetry Bar */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        <div className="rounded-2xl bg-gradient-to-br from-indigo-950/60 to-slate-900 p-5 border border-indigo-500/30 shadow-xl flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
-            <Sparkles className="h-6 w-6" />
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5">
+        <div className="rounded-xl sm:rounded-2xl bg-gradient-to-br from-indigo-950/60 to-slate-900 p-4 sm:p-5 border border-indigo-500/30 shadow-xl flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 shrink-0">
+            <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />
           </div>
-          <div>
-            <div className="text-xs font-bold uppercase text-indigo-400">AI Signal Neural Score</div>
-            <div className="text-2xl font-black text-white mt-1">98.4 / 100</div>
-            <p className="text-[11px] text-slate-400">Continuous Deep Reinforcement Sync</p>
-          </div>
-        </div>
-
-        <div className="rounded-2xl bg-gradient-to-br from-emerald-950/60 to-slate-900 p-5 border border-emerald-500/30 shadow-xl flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-            <Leaf className="h-6 w-6" />
-          </div>
-          <div>
-            <div className="text-xs font-bold uppercase text-emerald-400">Total Carbon Mitigation</div>
-            <div className="text-2xl font-black text-white mt-1">14.2 Tons Saved</div>
-            <p className="text-[11px] text-emerald-300">Reduced intersection idling emissions</p>
+          <div className="min-w-0 flex-1">
+            <div className="text-[11px] sm:text-xs font-bold uppercase text-indigo-400">AI Signal Neural Score</div>
+            <div className="text-xl sm:text-2xl font-black text-white mt-0.5 sm:mt-1">98.4 / 100</div>
+            <p className="text-[10px] sm:text-[11px] text-slate-400">Continuous Deep Reinforcement Sync</p>
           </div>
         </div>
 
-        <div className="rounded-2xl bg-gradient-to-br from-purple-950/60 to-slate-900 p-5 border border-purple-500/30 shadow-xl flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30">
-            <Cpu className="h-6 w-6" />
+        <div className="rounded-xl sm:rounded-2xl bg-gradient-to-br from-emerald-950/60 to-slate-900 p-4 sm:p-5 border border-emerald-500/30 shadow-xl flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shrink-0">
+            <Leaf className="h-5 w-5 sm:h-6 sm:w-6" />
           </div>
-          <div>
-            <div className="text-xs font-bold uppercase text-purple-400">Edge ALPR Accuracy</div>
-            <div className="text-2xl font-black text-white mt-1">99.82%</div>
-            <p className="text-[11px] text-slate-400">Optical character validation frames</p>
+          <div className="min-w-0 flex-1">
+            <div className="text-[11px] sm:text-xs font-bold uppercase text-emerald-400">Total Carbon Mitigation</div>
+            <div className="text-xl sm:text-2xl font-black text-white mt-0.5 sm:mt-1">14.2 Tons Saved</div>
+            <p className="text-[10px] sm:text-[11px] text-emerald-300">Reduced intersection idling emissions</p>
+          </div>
+        </div>
+
+        <div className="rounded-xl sm:rounded-2xl bg-gradient-to-br from-purple-950/60 to-slate-900 p-4 sm:p-5 border border-purple-500/30 shadow-xl flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 shrink-0">
+            <Cpu className="h-5 w-5 sm:h-6 sm:w-6" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[11px] sm:text-xs font-bold uppercase text-purple-400">Edge ALPR Accuracy</div>
+            <div className="text-xl sm:text-2xl font-black text-white mt-0.5 sm:mt-1">99.82%</div>
+            <p className="text-[10px] sm:text-[11px] text-slate-400">Optical character validation frames</p>
           </div>
         </div>
       </div>
 
       {/* 2. Main Recharts Graphical Visualizations Deck */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         
         {/* Left 2 Cols: Recharts Network Live Throughput & Capacity Trends */}
-        <div className="rounded-2xl bg-slate-900/80 p-6 border border-slate-800 shadow-xl lg:col-span-2 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <div>
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-indigo-400" /> Hourly Network Live Throughput vs AI Capacity
+        <div className="rounded-xl sm:rounded-2xl bg-slate-900/80 p-4 sm:p-6 border border-slate-800 shadow-xl lg:col-span-2 space-y-3 sm:space-y-4">
+          <div className="flex flex-col gap-2 sm:gap-0">
+            <div className="min-w-0">
+              <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2 flex-wrap">
+                <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-indigo-400 shrink-0" /> <span>Hourly Network Throughput</span>
               </h3>
-              <p className="text-xs text-slate-400">Comparing active vehicle flow against dynamic capacity calculated by Nexa AI.</p>
+              <p className="text-[11px] sm:text-xs text-slate-400">Comparing active vehicle flow against dynamic capacity.</p>
             </div>
-            <span className="flex items-center gap-2 text-xs font-semibold text-slate-300 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
-              <span className="h-2.5 w-2.5 rounded-full bg-indigo-500" /> Actual Flow
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 ml-2" /> AI Optimal Threshold
-            </span>
+            <div className="flex items-center gap-2 text-[10px] sm:text-xs font-semibold text-slate-300 bg-slate-950 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-slate-800 w-fit mt-2 sm:mt-0">
+              <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-indigo-500 shrink-0" /> Flow
+              <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-emerald-500 ml-1.5 sm:ml-2 shrink-0" /> Capacity
+            </div>
           </div>
 
-          <div className="h-80 w-full pt-4">
+          <div className="h-60 sm:h-80 w-full pt-2 sm:pt-4">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={throughputHistory} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
@@ -175,15 +175,15 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
         </div>
 
         {/* Right 1 Col: Recharts Vehicle Distribution Classification */}
-        <div className="rounded-2xl bg-slate-900/80 p-6 border border-slate-800 shadow-xl flex flex-col justify-between space-y-4">
+        <div className="rounded-xl sm:rounded-2xl bg-slate-900/80 p-4 sm:p-6 border border-slate-800 shadow-xl flex flex-col justify-between space-y-3 sm:space-y-4">
           <div>
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <BarChart3 className="h-5 w-5 text-indigo-400" /> Vehicle Class Classification Deck
+            <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+              <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-indigo-400" /> Vehicle Class Classification
             </h3>
-            <p className="text-xs text-slate-400">Live multi-modal classification breakdown derived from infrared & LiDAR gate matrices.</p>
+            <p className="text-[11px] sm:text-xs text-slate-400">Live multi-modal classification breakdown.</p>
           </div>
 
-          <div className="h-64 w-full flex items-center justify-center">
+          <div className="h-48 sm:h-64 w-full flex items-center justify-center">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -208,14 +208,14 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
           </div>
 
           {/* Custom Beautiful Legend inside Card */}
-          <div className="grid grid-cols-1 gap-2 pt-2 border-t border-slate-800/80 max-h-36 overflow-y-auto scrollbar-none">
+          <div className="grid grid-cols-2 sm:grid-cols-1 gap-1.5 sm:gap-2 pt-2 sm:pt-3 border-t border-slate-800/80 max-h-36 overflow-y-auto scrollbar-none">
             {vehicleCategories.map((item, i) => (
-              <div key={i} className="flex items-center justify-between text-xs">
-                <span className="flex items-center gap-2 text-slate-300">
-                  <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
-                  <span className="truncate">{item.name}</span>
+              <div key={i} className="flex items-center justify-between text-[10px] sm:text-xs">
+                <span className="flex items-center gap-1.5 sm:gap-2 text-slate-300 min-w-0">
+                  <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
+                  <span className="truncate text-[10px] sm:text-xs">{item.name}</span>
                 </span>
-                <span className="font-mono font-bold text-white shrink-0">{item.value}%</span>
+                <span className="font-mono font-bold text-white shrink-0 ml-1">{item.value}%</span>
               </div>
             ))}
           </div>
@@ -224,103 +224,104 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
       </div>
 
       {/* 3. Live Automated License Plate Recognition (ALPR) Security Suite */}
-      <div className="rounded-2xl bg-slate-900/80 p-6 border border-slate-800 shadow-xl space-y-6">
+      <div className="rounded-xl sm:rounded-2xl bg-slate-900/80 p-4 sm:p-6 border border-slate-800 shadow-xl space-y-4 sm:space-y-6">
         
         {/* Header & Export Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-4">
+        <div className="flex flex-col gap-3 sm:gap-4 border-b border-slate-800 pb-3 sm:pb-4">
           <div>
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <Car className="h-5 w-5 text-indigo-400" /> Live Automated License Plate Recognition feed (ALPR)
+            <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+              <Car className="h-4 w-4 sm:h-5 sm:w-5 text-indigo-400" /> <span>Live ALPR Feed</span>
             </h3>
-            <p className="text-xs text-slate-400">High-speed character recognition from toll plazas, border portals, and school corridors.</p>
+            <p className="text-[11px] sm:text-xs text-slate-400">High-speed character recognition from toll plazas, border portals, and school corridors.</p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center">
             <button
               onClick={handleExportCsv}
-              className="flex items-center gap-2 rounded-xl bg-slate-800 px-4 py-2 text-xs font-bold text-slate-200 transition-all hover:bg-slate-700 border border-slate-700"
+              className="flex items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl bg-slate-800 px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold text-slate-200 transition-all hover:bg-slate-700 border border-slate-700 w-full sm:w-auto justify-center sm:justify-start"
             >
-              <Download className="h-3.5 w-3.5" /> Export Audit CSV
+              <Download className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" /> <span>Export CSV</span>
             </button>
           </div>
         </div>
 
         {/* Audit Search, Filter & Mock Injection */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 items-start">
           
           {/* Left 2 Cols: Records List & Table */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-3 sm:space-y-4">
             
             {/* Search inputs */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col gap-2 sm:gap-3">
               <div className="relative flex-1">
-                <Search className="absolute left-3.5 top-3 h-4 w-4 text-slate-500" />
+                <Search className="absolute left-2.5 sm:left-3.5 top-2 sm:top-3 h-3.5 w-3.5 sm:h-4 sm:w-4 text-slate-500" />
                 <input
                   type="text"
-                  placeholder="Search by license plate or intersection crossing node..."
+                  placeholder="Search plates or crossing..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full rounded-xl bg-slate-950 pl-10 pr-4 py-2.5 text-xs text-white border border-slate-800 focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-lg sm:rounded-xl bg-slate-950 pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-2.5 text-xs text-white border border-slate-800 focus:border-indigo-500 focus:outline-none"
                 />
               </div>
 
               <button
                 onClick={() => setFilterFlagged(!filterFlagged)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all border ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-bold transition-all border w-full sm:w-auto justify-center sm:justify-start ${
                   filterFlagged ? 'bg-rose-500/20 text-rose-300 border-rose-500' : 'bg-slate-950 text-slate-400 border-slate-800 hover:border-slate-700'
                 }`}
               >
-                <AlertTriangle className="h-3.5 w-3.5 text-rose-400" />
-                <span>{filterFlagged ? 'Show All Scans' : 'Filter Flagged Alerts'}</span>
+                <AlertTriangle className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-rose-400 shrink-0" />
+                <span>{filterFlagged ? 'All Scans' : 'Flagged'}</span>
               </button>
             </div>
 
             {/* Live Table */}
-            <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950 max-h-96">
-              <table className="w-full text-left border-collapse text-xs">
+            <div className="overflow-x-auto rounded-lg sm:rounded-xl border border-slate-800 bg-slate-950 max-h-96">
+              <table className="w-full text-left border-collapse text-[11px] sm:text-xs">
                 <thead>
                   <tr className="border-b border-slate-800 bg-slate-900/60 font-semibold text-slate-400">
-                    <th className="py-3 px-4">Timestamp</th>
-                    <th className="py-3 px-4 font-mono">Plate Number</th>
-                    <th className="py-3 px-4">Crossing Source Portal</th>
-                    <th className="py-3 px-4">Vehicle Category</th>
-                    <th className="py-3 px-4">Speed</th>
-                    <th className="py-3 px-4">Security Validation</th>
+                    <th className="py-2 sm:py-3 px-2.5 sm:px-4 text-[10px] sm:text-xs">Time</th>
+                    <th className="py-2 sm:py-3 px-2.5 sm:px-4 font-mono text-[10px] sm:text-xs">Plate</th>
+                    <th className="hidden sm:table-cell py-3 px-4">Crossing</th>
+                    <th className="hidden md:table-cell py-3 px-4">Category</th>
+                    <th className="py-2 sm:py-3 px-2.5 sm:px-4 text-[10px] sm:text-xs">Speed</th>
+                    <th className="py-2 sm:py-3 px-2.5 sm:px-4 text-[10px] sm:text-xs">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-800/80 text-slate-300">
                   {filteredRecords.length === 0 ? (
                     <tr>
-                      <td colSpan={6} className="py-8 text-center text-slate-500 font-medium">
-                        No ALPR scans logged matching current security filters.
+                      <td colSpan={6} className="py-6 sm:py-8 text-center text-slate-500 font-medium text-xs sm:text-sm">
+                        No ALPR scans matching filters.
                       </td>
                     </tr>
                   ) : (
                     filteredRecords.map(r => (
                       <tr key={r.id} className="hover:bg-slate-900/40 transition-colors">
-                        <td className="py-3 px-4 font-mono text-slate-400">{r.timestamp}</td>
-                        <td className="py-3 px-4">
-                          <span className="font-mono font-bold rounded bg-slate-800 px-2 py-1 text-white border border-slate-700">
+                        <td className="py-2 sm:py-3 px-2.5 sm:px-4 font-mono text-slate-400 text-[10px] sm:text-xs whitespace-nowrap">{r.timestamp}</td>
+                        <td className="py-2 sm:py-3 px-2.5 sm:px-4">
+                          <span className="font-mono font-bold rounded bg-slate-800 px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs text-white border border-slate-700 block">
                             {r.plate}
                           </span>
                         </td>
-                        <td className="py-3 px-4 font-medium text-slate-200">{r.crossingName}</td>
-                        <td className="py-3 px-4 text-slate-400">{r.vehicleType}</td>
-                        <td className="py-3 px-4 font-mono">
+                        <td className="hidden sm:table-cell py-3 px-4 font-medium text-slate-200 text-xs truncate">{r.crossingName}</td>
+                        <td className="hidden md:table-cell py-3 px-4 text-slate-400 text-xs">{r.vehicleType}</td>
+                        <td className="py-2 sm:py-3 px-2.5 sm:px-4 font-mono text-[10px] sm:text-xs">
                           <span className={r.speed > 70 ? 'text-rose-400 font-bold' : 'text-slate-300'}>
-                            {r.speed} mph
+                            {r.speed}
                           </span>
                         </td>
-                        <td className="py-3 px-4">
+                        <td className="py-2 sm:py-3 px-2.5 sm:px-4">
                           {r.flagged ? (
-                            <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-500/10 px-2.5 py-1 text-[11px] font-bold text-rose-400 border border-rose-500/30 animate-pulse">
-                              <ShieldAlert className="h-3 w-3" />
-                              {r.flagReason || 'Flagged Unit'}
+                            <span className="inline-flex items-center gap-0.5 sm:gap-1.5 rounded-full bg-rose-500/10 px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-[9px] sm:text-[11px] font-bold text-rose-400 border border-rose-500/30 animate-pulse whitespace-nowrap">
+                              <ShieldAlert className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
+                              <span className="hidden sm:inline">{r.flagReason || 'Flagged'}</span>
+                              <span className="sm:hidden">Flagged</span>
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1.5 text-emerald-400 text-[11px] font-medium">
-                              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                              Verified Valid
+                            <span className="inline-flex items-center gap-0.5 sm:gap-1.5 text-emerald-400 text-[9px] sm:text-[11px] font-medium whitespace-nowrap">
+                              <CheckCircle2 className="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 text-emerald-500 shrink-0" />
+                              <span className="hidden sm:inline">Valid</span>
                             </span>
                           )}
                         </td>
