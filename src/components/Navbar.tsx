@@ -1,5 +1,6 @@
 import React from 'react';
-import { Activity, ShieldAlert, Zap, Radio, Layers, BarChart3, Settings2, Sparkles, Siren } from 'lucide-react';
+import { Activity, ShieldAlert, Zap, Radio, Layers, BarChart3, Settings2, Sparkles, Siren, User } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 interface NavbarProps {
   activeTab: string;
@@ -7,6 +8,7 @@ interface NavbarProps {
   systemHealth: number;
   activeIncidentsCount: number;
   onTriggerGlobalEmergency: () => void;
+  onOpenAuthModal: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -15,7 +17,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   systemHealth,
   activeIncidentsCount,
   onTriggerGlobalEmergency,
+  onOpenAuthModal,
 }) => {
+  const { user } = useAuth();
+
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
@@ -30,10 +35,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="flex items-center gap-2">
               <span className="text-xl font-bold tracking-tight text-white">OmniCross</span>
               <span className="rounded-md bg-indigo-500/20 px-2 py-0.5 text-xs font-semibold text-indigo-400 border border-indigo-500/30">
-                NEXA AI v4.8
+                PRO ENGINE v5.0
               </span>
             </div>
-            <p className="text-xs text-slate-400">Intelligent Heavy-Traffic & Crossings Command Center</p>
+            <p className="text-xs text-slate-400">Smart Traffic Intelligence & Command Centre</p>
           </div>
         </div>
 
@@ -60,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Activity className="h-4 w-4" />
-            Live Crossing Simulator
+            Live Simulator & Twin
           </button>
 
           <button
@@ -72,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Zap className="h-4 w-4" />
-            Cloud & API Load Balancer
+            Cloud & API Load
           </button>
 
           <button
@@ -113,13 +118,21 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Settings2 className="h-4 w-4" />
-            Crossing Studio
+            Digital Twin Studio
           </button>
         </nav>
 
-        {/* Right: Emergency Override & System KPIs */}
+        {/* Right: RBAC Identity & Emergency Override */}
         <div className="flex items-center gap-3">
           
+          <button
+            onClick={onOpenAuthModal}
+            className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900 px-3 py-1.5 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition-all"
+          >
+            <User className="h-4 w-4 text-indigo-400" />
+            <span className="hidden lg:inline">{user?.role || 'LOGIN'}</span>
+          </button>
+
           <div className="hidden lg:flex items-center gap-2 border-r border-slate-800 pr-3">
             <div className="text-right">
               <div className="text-xs font-semibold text-slate-200 flex items-center justify-end gap-1">
@@ -134,54 +147,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="group relative flex items-center gap-2 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 px-3.5 py-2 text-xs font-bold text-white shadow-lg shadow-red-600/30 transition-all hover:from-red-500 hover:to-rose-500 hover:shadow-red-600/50 active:scale-95"
           >
             <Siren className="h-4 w-4 animate-spin" />
-            <span>VIP / Emergency Green Wave</span>
-            <span className="absolute -top-1.5 -right-1.5 flex h-3 w-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-400 opacity-75"></span>
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-rose-500"></span>
-            </span>
+            <span>Emergency Green Wave</span>
           </button>
         </div>
 
-      </div>
-
-      {/* Mobile nav */}
-      <div className="flex md:hidden overflow-x-auto py-2 px-4 gap-2 bg-slate-900 border-t border-slate-800 border-b scrollbar-none">
-        <button
-          onClick={() => setActiveTab('overview')}
-          className={`px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap ${activeTab === 'overview' ? 'bg-indigo-600 text-white' : 'text-slate-300 bg-slate-800/50'}`}
-        >
-          Dashboard
-        </button>
-        <button
-          onClick={() => setActiveTab('visualizer')}
-          className={`px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap ${activeTab === 'visualizer' ? 'bg-indigo-600 text-white' : 'text-slate-300 bg-slate-800/50'}`}
-        >
-          Simulator
-        </button>
-        <button
-          onClick={() => setActiveTab('infrastructure')}
-          className={`px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap ${activeTab === 'infrastructure' ? 'bg-indigo-600 text-white' : 'text-slate-300 bg-slate-800/50'}`}
-        >
-          Cloud Load
-        </button>
-        <button
-          onClick={() => setActiveTab('analytics')}
-          className={`px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap ${activeTab === 'analytics' ? 'bg-indigo-600 text-white' : 'text-slate-300 bg-slate-800/50'}`}
-        >
-          Analytics
-        </button>
-        <button
-          onClick={() => setActiveTab('incidents')}
-          className={`px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap ${activeTab === 'incidents' ? 'bg-indigo-600 text-white' : 'text-slate-300 bg-slate-800/50'}`}
-        >
-          Incidents ({activeIncidentsCount})
-        </button>
-        <button
-          onClick={() => setActiveTab('builder')}
-          className={`px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap ${activeTab === 'builder' ? 'bg-indigo-600 text-white' : 'text-slate-300 bg-slate-800/50'}`}
-        >
-          Studio
-        </button>
       </div>
     </header>
   );
