@@ -1,0 +1,17 @@
+◇ injected env (4) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+[Simulator] Synthetic Traffic Simulator started (Interval: 3000ms)
+[DB] Standard MongoDB connection failed, starting MongoMemoryServer...
+[DB] Connected to MongoMemoryServer at mongodb://127.0.0.1:35107/
+[Seed] Seeding initial crossings...
+[Seed] Seeding initial incidents...
+[Seed] Seeding default RBAC users...
+=======================================================
+🚀 OmniCross Command Centre Server running on port 5000
+📡 Socket.IO & Telemetry Simulator Active
+=======================================================
+[Socket] Client connected: t0JZUW5dRXCpCZUbAAAA
+[Socket] Client disconnected: t0JZUW5dRXCpCZUbAAAA
+[Socket] Client connected: 40Aql80V-fOuHyN_AAAB
+[Socket] Client disconnected: 40Aql80V-fOuHyN_AAAB
+[Socket] Client connected: pME0an0qc9bY8NpDAAAC
+[Socket] Client disconnected: pME0an0qc9bY8NpDAAAC
