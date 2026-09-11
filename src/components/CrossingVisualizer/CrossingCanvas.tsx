@@ -1,13 +1,98 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Crossing, Vehicle } from '../../types';
 
 interface CrossingCanvasProps {
   crossing: Crossing;
-  vehicles: Vehicle[];
+  vehicles?: Vehicle[];
 }
 
-export const CrossingCanvas: React.FC<CrossingCanvasProps> = ({ crossing, vehicles }) => {
+export const CrossingCanvas: React.FC<CrossingCanvasProps> = ({ crossing, vehicles: propVehicles }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [localVehicles, setLocalVehicles] = useState<Vehicle[]>([]);
+
+  // Generate dynamic simulated vehicles if propVehicles is not passed or empty
+  useEffect(() => {
+    if (propVehicles && propVehicles.length > 0) {
+      setLocalVehicles(propVehicles);
+      return;
+    }
+
+    const count = Math.min(35, Math.max(8, crossing.activeVehiclesCount));
+    const generated: Vehicle[] = [];
+    const directions: ('north' | 'south' | 'east' | 'west')[] = ['north', 'south', 'east', 'west'];
+    const types: ('car' | 'truck' | 'bus' | 'emergency')[] = ['car', 'car', 'car', 'truck', 'bus', 'emergency'];
+
+    const canvasWidth = 760;
+    const canvasHeight = 520;
+
+    for (let i = 0; i < count; i++) {
+      const dir = directions[i % 4];
+      const vehType = types[Math.floor(Math.random() * types.length)];
+      let x = 0;
+      let y = 0;
+      let targetX = 0;
+      let targetY = 0;
+
+      if (dir === 'east') {
+        x = Math.random() * (canvasWidth / 2 - 80);
+        y = canvasHeight / 2 + 15 + (i % 2) * 20;
+        targetX = canvasWidth;
+        targetY = y;
+      } else if (dir === 'west') {
+        x = canvasWidth - Math.random() * (canvasWidth / 2 - 80);
+        y = canvasHeight / 2 - 35 - (i % 2) * 20;
+        targetX = 0;
+        targetY = y;
+      } else if (dir === 'south') {
+        x = canvasWidth / 2 - 35 - (i % 2) * 20;
+        y = Math.random() * (canvasHeight / 2 - 80);
+        targetX = x;
+        targetY = canvasHeight;
+      } else {
+        x = canvasWidth / 2 + 15 + (i % 2) * 20;
+        y = canvasHeight - Math.random() * (canvasHeight / 2 - 80);
+        targetX = x;
+        targetY = 0;
+      }
+
+      generated.push({
+        id: `veh-${crossing.id}-${i}`,
+        type: vehType,
+        direction: dir,
+        speed: Math.floor(Math.random() * 20 + 20),
+        position: { x, y },
+        targetPosition: { x: targetX, y: targetY },
+        status: 'moving',
+        isPriority: vehType === 'emergency',
+      });
+    }
+
+    if (crossing.hasRailwayGate && crossing.isRailwayGateClosed) {
+      generated.push({
+        id: `train-${crossing.id}`,
+        type: 'train' as any,
+        direction: 'south',
+        speed: 55,
+        position: { x: canvasWidth / 2, y: 100 },
+        targetPosition: { x: canvasWidth / 2, y: canvasHeight },
+        status: 'moving',
+      });
+    }
+
+    if (crossing.hasDrawbridge && crossing.isDrawbridgeUp) {
+      generated.push({
+        id: `ship-${crossing.id}`,
+        type: 'ship' as any,
+        direction: 'east',
+        speed: 15,
+        position: { x: 100, y: canvasHeight / 2 },
+        targetPosition: { x: canvasWidth, y: canvasHeight / 2 },
+        status: 'moving',
+      });
+    }
+
+    setLocalVehicles(generated);
+  }, [crossing.id, crossing.activeVehiclesCount, crossing.isRailwayGateClosed, crossing.isDrawbridgeUp, propVehicles]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -16,6 +101,8 @@ export const CrossingCanvas: React.FC<CrossingCanvasProps> = ({ crossing, vehicl
     if (!ctx) return;
 
     let animationFrameId: number;
+
+    const activeVehicles = propVehicles || localVehicles;
 
     const render = () => {
       // 1. Clear background
@@ -138,7 +225,11 @@ export const CrossingCanvas: React.FC<CrossingCanvasProps> = ({ crossing, vehicl
       const drawTrafficLight = (lx: number, ly: number, state: string, label: string) => {
         ctx.fillStyle = '#020617'; // black housing
         ctx.beginPath();
-        ctx.roundRect(lx - 14, ly - 36, 28, 72, 8);
+        if (typeof (ctx as any).roundRect === 'function') {
+          (ctx as any).roundRect(lx - 14, ly - 36, 28, 72, 8);
+        } else {
+          ctx.rect(lx - 14, ly - 36, 28, 72);
+        }
         ctx.fill();
         ctx.strokeStyle = '#475569';
         ctx.stroke();
@@ -146,26 +237,14 @@ export const CrossingCanvas: React.FC<CrossingCanvasProps> = ({ crossing, vehicl
         // Red bulb
         ctx.fillStyle = state === 'red' ? '#ef4444' : '#450a0a';
         ctx.beginPath(); ctx.arc(lx, ly - 20, 8, 0, Math.PI * 2); ctx.fill();
-        if (state === 'red') {
-          ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 10;
-          ctx.fill(); ctx.shadowBlur = 0;
-        }
 
         // Yellow bulb
         ctx.fillStyle = state === 'yellow' ? '#f59e0b' : '#451a03';
         ctx.beginPath(); ctx.arc(lx, ly, 8, 0, Math.PI * 2); ctx.fill();
-        if (state === 'yellow') {
-          ctx.shadowColor = '#f59e0b'; ctx.shadowBlur = 10;
-          ctx.fill(); ctx.shadowBlur = 0;
-        }
 
         // Green bulb
         ctx.fillStyle = state === 'green' ? '#10b981' : '#022c22';
         ctx.beginPath(); ctx.arc(lx, ly + 20, 8, 0, Math.PI * 2); ctx.fill();
-        if (state === 'green') {
-          ctx.shadowColor = '#10b981'; ctx.shadowBlur = 10;
-          ctx.fill(); ctx.shadowBlur = 0;
-        }
 
         // Label
         ctx.fillStyle = '#cbd5e1';
@@ -229,7 +308,7 @@ export const CrossingCanvas: React.FC<CrossingCanvasProps> = ({ crossing, vehicl
       }
 
       // 9. Draw Live Animated Vehicles / Trains / Ships
-      vehicles.forEach(veh => {
+      (activeVehicles || []).forEach(veh => {
         ctx.save();
         ctx.translate(veh.position.x, veh.position.y);
 
@@ -264,32 +343,49 @@ export const CrossingCanvas: React.FC<CrossingCanvasProps> = ({ crossing, vehicl
         } else if (veh.type === 'emergency') {
           // Ambulance / Fire Engine
           ctx.fillStyle = '#ef4444'; // bright red
-          ctx.beginPath(); ctx.roundRect(-22, -12, 44, 24, 6); ctx.fill();
-          // Flashing lights
-          const flash = Math.floor(Date.now() / 150) % 2 === 0;
-          ctx.fillStyle = flash ? '#3b82f6' : '#ef4444';
+          if (typeof (ctx as any).roundRect === 'function') {
+            (ctx as any).roundRect(-22, -12, 44, 24, 6);
+          } else {
+            ctx.rect(-22, -12, 44, 24);
+          }
+          ctx.fill();
+
+          ctx.fillStyle = '#3b82f6';
           ctx.beginPath(); ctx.arc(6, -6, 4, 0, Math.PI * 2); ctx.fill();
-          ctx.fillStyle = flash ? '#ef4444' : '#3b82f6';
-          ctx.beginPath(); ctx.arc(6, 6, 4, 0, Math.PI * 2); ctx.fill();
           ctx.fillStyle = '#ffffff';
           ctx.font = 'bold 9px sans-serif';
           ctx.fillText('EMS', -12, 3);
         } else if (veh.type === 'truck') {
           // Semi Transport Truck
           ctx.fillStyle = '#3b82f6'; // Blue cab
-          ctx.beginPath(); ctx.roundRect(10, -12, 18, 24, 4); ctx.fill();
+          if (typeof (ctx as any).roundRect === 'function') {
+            (ctx as any).roundRect(10, -12, 18, 24, 4);
+          } else {
+            ctx.rect(10, -12, 18, 24);
+          }
+          ctx.fill();
           ctx.fillStyle = '#e2e8f0'; // Silver trailer
           ctx.fillRect(-28, -13, 36, 26);
         } else if (veh.type === 'bus') {
           // City Metro Bus
           ctx.fillStyle = '#10b981'; // Emerald bus
-          ctx.beginPath(); ctx.roundRect(-25, -12, 50, 24, 5); ctx.fill();
+          if (typeof (ctx as any).roundRect === 'function') {
+            (ctx as any).roundRect(-25, -12, 50, 24, 5);
+          } else {
+            ctx.rect(-25, -12, 50, 24);
+          }
+          ctx.fill();
           ctx.fillStyle = '#ffffff';
           ctx.fillText('CITY TRANSIT', -18, 3);
         } else {
           // Normal Car
           ctx.fillStyle = veh.isPriority ? '#f43f5e' : '#6366f1'; // Indigo or Rose
-          ctx.beginPath(); ctx.roundRect(-16, -10, 32, 20, 5); ctx.fill();
+          if (typeof (ctx as any).roundRect === 'function') {
+            (ctx as any).roundRect(-16, -10, 32, 20, 5);
+          } else {
+            ctx.rect(-16, -10, 32, 20);
+          }
+          ctx.fill();
           ctx.fillStyle = '#94a3b8'; // windshield
           ctx.fillRect(2, -8, 8, 16);
           ctx.fillRect(-10, -8, 6, 16);
@@ -306,7 +402,7 @@ export const CrossingCanvas: React.FC<CrossingCanvasProps> = ({ crossing, vehicl
       ctx.setLineDash([]);
       ctx.fillStyle = '#6366f1';
       ctx.font = '9px sans-serif';
-      ctx.fillText(`AI SENSOR MATRIX: ACTIVE (Nodes: ${vehicles.length})`, cx - roadWidth / 2 - 28, cy - roadWidth / 2 - 35);
+      ctx.fillText(`AI SENSOR MATRIX: ACTIVE (Nodes: ${(activeVehicles || []).length})`, cx - roadWidth / 2 - 28, cy - roadWidth / 2 - 35);
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -316,7 +412,7 @@ export const CrossingCanvas: React.FC<CrossingCanvasProps> = ({ crossing, vehicl
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [crossing, vehicles]);
+  }, [crossing, propVehicles, localVehicles]);
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 p-4 shadow-2xl">

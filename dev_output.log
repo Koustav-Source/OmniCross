@@ -7,3 +7,4 @@
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
+6:49:29 AM [vite] (client) hmr update /src/index.css, /src/components/CrossingVisualizer/CrossingCanvas.tsx
